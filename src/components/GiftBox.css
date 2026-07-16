@@ -1,0 +1,110 @@
+.gift-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gift-box {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  cursor: pointer;
+}
+
+.lid {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 220px;
+  height: 55px;
+
+  background: #ff5c93;
+
+  border-radius: 14px;
+
+  transition: .7s ease;
+
+  z-index: 10;
+}
+
+.box {
+  position: absolute;
+
+  bottom: 0;
+
+  width: 220px;
+  height: 170px;
+
+  background: #ff79aa;
+
+  border-radius: 0 0 20px 20px;
+}
+
+.ribbon-v{
+  position:absolute;
+
+  left:50%;
+
+  transform:translateX(-50%);
+
+  width:24px;
+
+  height:220px;
+
+  background:white;
+
+  z-index:11;
+}
+
+.ribbon-h{
+
+  position:absolute;
+
+  top:42px;
+
+  width:220px;
+
+  height:24px;
+
+  background:white;
+
+  z-index:11;
+
+}
+
+.bow{
+
+  position:absolute;
+
+  top:-26px;
+
+  left:50%;
+
+  transform:translateX(-50%);
+
+  font-size:52px;
+
+  z-index:20;
+
+}
+
+.open .lid{
+
+  transform:
+  translateY(-90px)
+  rotate(-12deg);
+
+}
+
+.open .bow{
+
+  transform:
+  translateX(-50%)
+  translateY(-90px)
+  rotate(-15deg);
+
+  transition:.7s;
+
+}
