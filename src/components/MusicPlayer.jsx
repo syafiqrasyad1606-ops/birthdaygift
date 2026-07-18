@@ -120,28 +120,34 @@ function MusicPlayer() {
         // existing bottom-4/6) so on notched/gesture-bar phones (iPhone
         // etc.) the player doesn't sit under the home-indicator area.
         style={{
-          paddingBottom: "env(safe-area-inset-bottom)",
-        }}
+    paddingBottom:
+        "max(env(safe-area-inset-bottom),6px)",
+}}
         className="
-          fixed
-          bottom-4
-          left-1/2
-          z-50
-          w-[calc(100%-1.5rem)]
-          max-w-[360px]
-          -translate-x-1/2
-          rounded-[28px]
-          border
-          border-white/30
-          bg-white/85
-          p-4
-          shadow-2xl
-          backdrop-blur-xl
-          sm:bottom-6
-          sm:right-6
-          sm:left-auto
-          sm:translate-x-0
-        "
+fixed
+bottom-2
+left-2
+right-2
+z-50
+
+rounded-3xl
+border
+border-white/30
+bg-white/90
+backdrop-blur-xl
+shadow-2xl
+
+p-3
+
+sm:left-auto
+sm:right-5
+sm:bottom-5
+sm:w-[340px]
+sm:p-4
+
+md:w-[360px]
+lg:w-[380px]
+"
       >
         {/* Top */}
 
@@ -159,22 +165,40 @@ function MusicPlayer() {
               duration: 8,
               ease: "linear",
             }}
-            className="shrink-0 rounded-full bg-rose-500 p-3 text-white shadow-lg"
+            className="
+shrink-0
+rounded-full
+bg-rose-500
+p-2.5
+sm:p-3
+shadow-lg
+"
           >
             <img
               src={musicSticker}
               alt=""
-              className="w-7 sm:w-8"
+              className="w-6 sm:w-7 md:w-8"
             />
           </motion.div>
 
           <div className="min-w-0 flex-1">
 
-            <h3 className="truncate text-base font-bold text-gray-800">
+            <h3 className="
+truncate
+text-sm
+sm:text-base
+font-bold
+text-gray-800
+">
               Glue Song
             </h3>
 
-            <p className="truncate text-sm text-gray-500">
+            <p className="
+truncate
+text-xs
+sm:text-sm
+text-gray-500
+">
               beabadoobee
             </p>
 
@@ -193,30 +217,35 @@ function MusicPlayer() {
             }
             aria-label={playing ? "Pause" : "Play"}
             className="
-              flex
-              h-12
-              w-12
-              shrink-0
-              items-center
-              justify-center
-              rounded-full
-              bg-rose-500
-              text-white
-              shadow-lg
-              transition
-              hover:bg-rose-600
-              focus-visible:outline-none
-              focus-visible:ring-4
-              focus-visible:ring-rose-300
-            "
+flex
+h-10
+w-10
+
+sm:h-12
+sm:w-12
+
+items-center
+justify-center
+
+rounded-full
+bg-rose-500
+text-white
+shadow-lg
+transition
+
+hover:bg-rose-600
+
+focus-visible:outline-none
+focus-visible:ring-4
+focus-visible:ring-rose-300
+"
           >
             {playing ? (
-              <FaPause size={18} />
+              <FaPause className="text-sm sm:text-base" />
             ) : (
               <FaPlay
-                size={18}
-                className="ml-0.5"
-              />
+className="ml-0.5 text-sm sm:text-base"
+/>
             )}
           </motion.button>
 
@@ -224,7 +253,7 @@ function MusicPlayer() {
 
         {/* Progress */}
 
-        <div className="mt-5">
+        <div className="mt-4">
 
                     <div
             onClick={handleSeek}
@@ -236,7 +265,16 @@ function MusicPlayer() {
             aria-valuemax={duration || 0}
             aria-valuenow={currentTime}
             aria-valuetext={`${formatTime(currentTime)} dari ${formatTime(duration)}`}
-            className="h-2.5 cursor-pointer overflow-hidden rounded-full bg-gray-200 outline-none focus-visible:ring-4 focus-visible:ring-rose-300"
+            className="
+h-2
+cursor-pointer
+overflow-hidden
+rounded-full
+bg-gray-200
+outline-none
+focus-visible:ring-4
+focus-visible:ring-rose-300
+"
           >
             <motion.div
               className="h-full rounded-full bg-gradient-to-r from-pink-500 to-rose-500"
@@ -253,7 +291,15 @@ function MusicPlayer() {
             />
           </div>
 
-          <div className="mt-2 flex items-center justify-between text-xs text-gray-500">
+          <div className="
+mt-2
+flex
+items-center
+justify-between
+text-[11px]
+sm:text-xs
+text-gray-500
+">
             <span>{formatTime(currentTime)}</span>
             <span>{formatTime(duration)}</span>
           </div>
