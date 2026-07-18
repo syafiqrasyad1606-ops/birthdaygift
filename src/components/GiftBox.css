@@ -1,24 +1,54 @@
 .gift-wrapper {
-  min-height: 100vh;
+  /* FIX: was min-height: 100vh, but this div sits inside Home.jsx's
+     <main> which already has min-h-screen (now min-h-[100dvh]) with its
+     own padding. Two stacked 100vh minimums forced this element taller
+     than the actual visible viewport, causing an extra vertical scroll
+     on some phones. Using 100% makes it fill whatever height the parent
+     already gives it instead of demanding another full screen. */
+  min-height: 100%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 20px;
 }
+
+/* =============================== */
+/* Gift Box */
+/* =============================== */
 
 .gift-box {
   position: relative;
-  width: 220px;
-  height: 220px;
+  width: clamp(160px, 38vw, 220px);
+  aspect-ratio: 1 / 1;
   cursor: pointer;
+
+  transition: transform .3s;
 }
+
+.gift-box:hover {
+  transform: scale(1.04);
+}
+
+/* FIX: visible focus state for keyboard users, since the box is now
+   focusable (see GiftBox.jsx). */
+.gift-box:focus-visible {
+  outline: 4px solid #fda4af;
+  outline-offset: 4px;
+  border-radius: 20px;
+}
+
+/* =============================== */
+/* Lid */
+/* =============================== */
 
 .lid {
   position: absolute;
   top: 0;
   left: 0;
 
-  width: 220px;
-  height: 55px;
+  width: 100%;
+  height: 25%;
 
   background: #ff5c93;
 
@@ -29,82 +59,157 @@
   z-index: 10;
 }
 
+/* =============================== */
+/* Box */
+/* =============================== */
+
 .box {
   position: absolute;
 
   bottom: 0;
 
-  width: 220px;
-  height: 170px;
+  width: 100%;
+  height: 77%;
 
   background: #ff79aa;
 
   border-radius: 0 0 20px 20px;
 }
 
-.ribbon-v{
-  position:absolute;
+/* =============================== */
+/* Ribbon Vertical */
+/* =============================== */
 
-  left:50%;
+.ribbon-v {
+  position: absolute;
 
-  transform:translateX(-50%);
+  left: 50%;
+  transform: translateX(-50%);
 
-  width:24px;
+  width: 11%;
+  height: 100%;
 
-  height:220px;
+  background: white;
 
-  background:white;
-
-  z-index:11;
+  z-index: 11;
 }
 
-.ribbon-h{
+/* =============================== */
+/* Ribbon Horizontal */
+/* =============================== */
 
-  position:absolute;
+.ribbon-h {
+  position: absolute;
 
-  top:42px;
+  top: 19%;
 
-  width:220px;
+  width: 100%;
+  height: 11%;
 
-  height:24px;
+  background: white;
 
-  background:white;
-
-  z-index:11;
-
+  z-index: 11;
 }
 
-.bow{
+/* =============================== */
+/* Bow */
+/* =============================== */
 
-  position:absolute;
+.bow {
+  position: absolute;
 
-  top:-26px;
+  top: -12%;
 
-  left:50%;
+  left: 50%;
 
-  transform:translateX(-50%);
+  transform: translateX(-50%);
 
-  font-size:52px;
+  font-size: clamp(38px, 8vw, 52px);
 
-  z-index:20;
+  z-index: 20;
 
+  transition: .7s;
 }
 
-.open .lid{
+/* =============================== */
+/* Light flash (opening effect) */
+/* =============================== */
+/* FIX (new): this class was referenced in GiftBox.jsx but never defined
+   anywhere, so the flash effect on opening never actually rendered.
+   A small radial-gradient dot that framer-motion scales up to 8x creates
+   the "burst of light" effect the animation was clearly built for. */
 
+.light {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 214, 224, 0.6) 45%,
+    rgba(255, 214, 224, 0) 75%
+  );
+  transform: translate(-50%, -50%);
+  z-index: 15;
+  pointer-events: none;
+}
+
+/* =============================== */
+/* Open Animation */
+/* =============================== */
+
+.open .lid {
   transform:
-  translateY(-90px)
-  rotate(-12deg);
+    translateY(-42%)
+    rotate(-12deg);
+}
+
+.open .bow {
+  transform:
+    translateX(-50%)
+    translateY(-42%)
+    rotate(-15deg);
+}
+
+/* =============================== */
+/* Phone */
+/* =============================== */
+
+@media (max-width: 640px) {
+
+  .gift-wrapper {
+    padding: 24px 20px;
+  }
+
+  .gift-box {
+    width: 170px;
+  }
 
 }
 
-.open .bow{
+/* =============================== */
+/* Tablet */
+/* =============================== */
 
-  transform:
-  translateX(-50%)
-  translateY(-90px)
-  rotate(-15deg);
+@media (min-width: 641px) and (max-width: 1024px) {
 
-  transition:.7s;
+  .gift-box {
+    width: 200px;
+  }
+
+}
+
+/* =============================== */
+/* Desktop Besar */
+/* =============================== */
+
+@media (min-width: 1600px) {
+
+  .gift-box {
+    width: 250px;
+  }
 
 }

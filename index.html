@@ -3,7 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- FIX: added viewport-fit=cover. Without it, env(safe-area-inset-*)
+         used in MusicPlayer.jsx always resolves to 0, so the player could
+         still sit under the home-indicator on notched iPhones. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>birthdaygift1</title>
   </head>
   <body>

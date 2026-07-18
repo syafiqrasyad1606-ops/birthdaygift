@@ -1,33 +1,56 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import confetti from "canvas-confetti";
+
+import BirthdayCake from "../components/BirthdayCake";
+
 import finalPhoto from "../assets/gallery/photo3.jpg";
 
+import cameraSticker from "../assets/stickers/camera.png";
+import starSticker from "../assets/stickers/star.png";
+import giftSticker from "../assets/stickers/gift.png";
+import letterSticker from "../assets/stickers/letter.png";
+import roseSticker from "../assets/stickers/rose.png";
+import teddySticker from "../assets/stickers/teddy-bear.png";
+import heartSticker from "../assets/stickers/heart.png";
+
 import { useProgress } from "../context/ProgressContext";
+
+const letter = [
+  "Selamat ulang tahun yaa. ❤️",
+  "Terima kasih udah meluangkan waktu buat menyelesaikan perjalanan kecil ini.",
+  "Aku tahu, ini mungkin bukan hadiah yang paling besar. Bukan juga hadiah yang paling mahal.",
+  "Tapi aku bikin semuanya dengan sepenuh hati, dan semoga setiap halaman yang kamu buka tadi bisa bikin kamu tersenyum walaupun cuma sebentar.",
+  "Di umur yang baru ini, aku cuma pengen berharap semoga kamu selalu sehat, selalu bahagia, dipertemukan dengan banyak hal baik, dan semua impian yang lagi kamu perjuangkan bisa terwujud satu per satu.",
+  "Jangan terlalu keras sama diri sendiri ya. Istirahat kalau capek. Tetap jadi diri kamu yang sekarang, karena itu salah satu alasan kenapa kamu begitu spesial.",
+  "Semoga hari ini penuh tawa, penuh kebahagiaan, dan semoga masih ada banyak cerita indah yang bisa kita lewati nanti.",
+  "Sekali lagi... Selamat Ulang Tahun. 🎂❤️",
+];
 
 function FinalGift() {
   const navigate = useNavigate();
 
-  const {
-    isEverythingCompleted,
-    resetProgress,
-  } = useProgress();
+  const { isEverythingCompleted, resetProgress } = useProgress();
+
+  const [visibleParagraphs, setVisibleParagraphs] = useState(0);
+  const [cakeFinished, setCakeFinished] = useState(false);
 
   useEffect(() => {
-    if (isEverythingCompleted) {
-      const timer = setTimeout(() => {
-        confetti({
-          particleCount: 250,
-          spread: 120,
-          origin: {
-            y: 0.6,
-          },
-        });
-      }, 600);
+    if (!isEverythingCompleted) return;
 
-      return () => clearTimeout(timer);
-    }
+    let current = 0;
+
+    const interval = setInterval(() => {
+      current++;
+
+      setVisibleParagraphs(current);
+
+      if (current >= letter.length) {
+        clearInterval(interval);
+      }
+    }, 1200);
+
+    return () => clearInterval(interval);
   }, [isEverythingCompleted]);
 
   const handleRestart = () => {
@@ -36,61 +59,186 @@ function FinalGift() {
   };
 
   if (!isEverythingCompleted) {
-    return (
-      <main className="flex min-h-screen items-center justify-center bg-gradient-to-br from-pink-100 via-rose-50 to-pink-200 px-6">
-        <motion.div
-          initial={{
-            opacity: 0,
-            scale: 0.9,
-          }}
-          animate={{
-            opacity: 1,
-            scale: 1,
-          }}
-          className="max-w-xl rounded-3xl bg-white p-10 text-center shadow-2xl"
-        >
-          <div className="text-7xl">
-            🔒
-          </div>
-
-          <h1 className="mt-6 text-4xl font-bold text-rose-600">
-            Hadiah Terakhir Masih Terkunci
-          </h1>
-
-          <p className="mt-6 text-lg leading-8 text-gray-700">
-            Sebelum membuka hadiah terakhir,
-            selesaikan dulu semua perjalanan yang sudah aku siapkan yaa. ❤️
-          </p>
-
-          <button
-            onClick={() => navigate("/menu")}
-            className="mt-10 rounded-full bg-rose-500 px-8 py-3 font-semibold text-white transition hover:bg-rose-600"
-          >
-            ← Kembali ke Menu
-          </button>
-        </motion.div>
-      </main>
-    );
-  }
-
   return (
-    <main className="min-h-screen bg-gradient-to-br from-pink-100 via-rose-50 to-pink-200 px-6 py-16">
+    // FIX: min-h-screen -> min-h-[100dvh] for accurate mobile height.
+    <main className="relative flex min-h-[100dvh] items-center justify-center overflow-hidden bg-gradient-to-br from-pink-100 via-rose-50 to-pink-200 px-4 py-8">
+
+      <motion.img
+        src={heartSticker}
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none absolute left-3 top-16 w-7 opacity-50 sm:left-10 sm:top-24 sm:w-10"
+        animate={{
+          y: [0, -20, 0],
+        }}
+        transition={{
+          repeat: Infinity,
+          duration: 3,
+        }}
+      />
+
+      <motion.img
+        src={heartSticker}
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none absolute right-3 top-28 w-6 opacity-60 sm:right-12 sm:top-40 sm:w-8"
+        animate={{
+          y: [0, -15, 0],
+        }}
+        transition={{
+          repeat: Infinity,
+          duration: 4,
+        }}
+      />
 
       <motion.div
         initial={{
           opacity: 0,
-          y: 40,
+          scale: 0.9,
         }}
         animate={{
           opacity: 1,
-          y: 0,
+          scale: 1,
         }}
-        transition={{
-          duration: 0.8,
-        }}
-        className="mx-auto max-w-3xl rounded-3xl bg-white p-10 shadow-2xl"
+        className="relative z-10 w-full max-w-xl rounded-3xl bg-white p-6 text-center shadow-2xl sm:p-10"
       >
 
+        <img
+          src={giftSticker}
+          alt=""
+          aria-hidden="true"
+          className="mx-auto w-20 sm:w-28"
+        />
+
+        <h1 className="mt-6 break-words text-3xl font-bold text-rose-600 sm:text-4xl">
+          Hadiah Terakhir Masih Terkunci
+        </h1>
+
+        <p className="mt-6 text-base leading-7 text-gray-700 sm:text-lg sm:leading-8">
+          Sebelum membuka hadiah terakhir,
+          selesaikan dulu semua perjalanan
+          yang sudah aku siapkan yaa. ❤️
+        </p>
+
+        <button
+          type="button"
+          onClick={() => navigate("/menu")}
+          className="mt-8 rounded-full bg-rose-500 px-6 py-3 text-base font-semibold text-white transition hover:bg-rose-600 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-rose-300 active:scale-95 sm:px-8 sm:text-lg"
+        >
+          ← Kembali ke Menu
+        </button>
+
+      </motion.div>
+
+    </main>
+  );
+}
+
+  return (
+ // FIX: min-h-screen -> min-h-[100dvh].
+ <main className="relative min-h-[100dvh] overflow-hidden bg-gradient-to-br from-pink-100 via-rose-50 to-pink-200 px-4 pt-10 pb-24 sm:px-6 sm:pt-14 sm:pb-24 md:pt-16">
+    {/* Floating Decoration */}
+    {/* FIX: all decorative stickers below given aria-hidden (screen readers
+        were reading "Heart", "Rose", "Camera", "Gift", "Star", "Teddy" one
+        after another before ever reaching the actual letter). The two that
+        were always visible (heart, star) are nudged in from the screen
+        edge on mobile so they can't get clipped. */}
+
+<motion.img
+  src={heartSticker}
+  alt=""
+  aria-hidden="true"
+  className="pointer-events-none absolute left-2 top-8 w-7 opacity-50 sm:left-8 sm:top-24 sm:w-10"
+  animate={{
+    y: [0, -20, 0],
+    rotate: [-8, 8, -8],
+  }}
+  transition={{
+    repeat: Infinity,
+    duration: 4,
+  }}
+/>
+
+<motion.img
+  src={roseSticker}
+  alt=""
+  aria-hidden="true"
+  className="pointer-events-none absolute right-10 top-40 hidden w-12 opacity-50 sm:block"
+  animate={{
+    y: [0, -18, 0],
+  }}
+  transition={{
+    repeat: Infinity,
+    duration: 3,
+  }}
+/>
+
+<motion.img
+  src={cameraSticker}
+  alt=""
+  aria-hidden="true"
+  className="pointer-events-none absolute right-12 bottom-24 hidden w-14 opacity-50 sm:block"
+  animate={{
+    y: [0, -15, 0],
+    rotate: [-6, 6, -6],
+  }}
+  transition={{
+    repeat: Infinity,
+    duration: 4,
+  }}
+/>
+
+<motion.img
+  src={giftSticker}
+  alt=""
+  aria-hidden="true"
+  className="pointer-events-none absolute left-12 bottom-20 hidden w-14 opacity-60 sm:block"
+  animate={{
+    rotate: [-10, 10, -10],
+  }}
+  transition={{
+    repeat: Infinity,
+    duration: 3,
+  }}
+/>
+
+<motion.img
+  src={starSticker}
+  alt=""
+  aria-hidden="true"
+  className="pointer-events-none absolute left-1/2 top-4 w-7 -translate-x-1/2 opacity-80 sm:top-12 sm:w-10"
+  animate={{
+    scale: [1, 1.2, 1],
+    rotate: [0, 10, -10, 0],
+  }}
+  transition={{
+    repeat: Infinity,
+    duration: 2,
+  }}
+/>
+
+<motion.img
+  src={teddySticker}
+  alt=""
+  aria-hidden="true"
+  className="pointer-events-none absolute right-24 top-[68%] hidden w-16 opacity-60 md:block"
+  animate={{
+    y: [0, -12, 0],
+  }}
+  transition={{
+    repeat: Infinity,
+    duration: 3,
+  }}
+/>
+
+    {/* Card Utama */}
+
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="relative z-10 mx-auto w-full max-w-4xl rounded-[28px] bg-white/95 backdrop-blur-xl shadow-2xl p-5 sm:rounded-[32px] sm:p-8 md:p-10"
+      >
         <motion.div
           animate={{
             rotate: [0, -8, 8, -8, 0],
@@ -99,118 +247,206 @@ function FinalGift() {
             repeat: Infinity,
             duration: 3,
           }}
-          className="text-center text-7xl"
+          className="text-center"
         >
-          🎁
+          <motion.img
+          src={giftSticker}
+          alt=""
+          aria-hidden="true"
+          className="mx-auto w-16 drop-shadow-xl sm:w-24 lg:w-28"
+          animate={{
+            y: [0, -10, 0],
+            rotate: [-4, 4, -4],
+          }}
+          transition={{
+            repeat: Infinity,
+            duration: 2,
+          }}
+        />
         </motion.div>
 
-        <h1 className="mt-6 text-center text-5xl font-bold text-rose-600">
+        <h1 className="mt-6 break-words text-center text-2xl font-bold text-rose-600 sm:text-3xl lg:text-5xl">
           Hadiah Terakhir
         </h1>
 
-        <p className="mt-3 text-center text-gray-500">
+        <p className="mt-3 text-center text-sm text-gray-500 sm:text-base">
           Terima kasih yaa, udah menyelesaikan semua perjalanan ini. 🤍
         </p>
 
-        <div className="mt-10 rounded-3xl bg-rose-50 p-8">
+        <div className="mt-8 rounded-3xl bg-rose-50 p-4 sm:mt-10 sm:p-8">
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
 
-          <h2 className="text-3xl font-bold text-rose-600">
-            💌 Untuk Kamu
-          </h2>
+  <img
+    src={letterSticker}
+    className="w-8 sm:w-10"
+    alt=""
+    aria-hidden="true"
+  />
 
-          <div className="mt-6 space-y-5 text-lg leading-9 text-gray-700">
+  <h2 className="break-words text-center text-2xl font-bold text-rose-600 sm:text-3xl">
+    Untuk Kamu
+  </h2>
 
-            <p>
-              Selamat ulang tahun yaa. ❤️
-            </p>
+  <img
+    src={roseSticker}
+    className="w-7 sm:w-9"
+    alt=""
+    aria-hidden="true"
+  />
 
-            <p>
-              Terima kasih udah meluangkan waktu buat menyelesaikan perjalanan kecil ini.
-            </p>
+</div>
 
-            <p>
-              Aku tahu, ini mungkin bukan hadiah yang paling besar.
-              Bukan juga hadiah yang paling mahal.
-            </p>
-
-            <p>
-              Tapi aku bikin semuanya dengan sepenuh hati,
-              dan semoga setiap halaman yang kamu buka tadi
-              bisa bikin kamu tersenyum walaupun cuma sebentar.
-            </p>
-
-            <p>
-              Di umur yang baru ini,
-              aku cuma pengen berharap semoga kamu selalu sehat,
-              selalu bahagia,
-              dipertemukan dengan banyak hal baik,
-              dan semua impian yang lagi kamu perjuangkan
-              bisa terwujud satu per satu.
-            </p>
-
-            <p>
-              Jangan terlalu keras sama diri sendiri ya.
-              Istirahat kalau capek.
-              Tetap jadi diri kamu yang sekarang,
-              karena itu salah satu alasan kenapa kamu begitu spesial.
-            </p>
-
-            <p>
-              Semoga hari ini penuh tawa,
-              penuh kebahagiaan,
-              dan semoga masih ada banyak cerita indah
-              yang bisa kita lewati nanti.
-            </p>
-
-            <p className="font-semibold text-rose-600">
-              Sekali lagi...
-              <br />
-              Selamat Ulang Tahun. 🎂❤️
-            </p>
-
+          <div className="mt-6 space-y-6 break-words text-[15px] leading-7 text-gray-700 sm:text-lg sm:leading-9">
+            {letter.slice(0, visibleParagraphs).map((text, index) => (
+              <motion.p
+                key={index}
+                initial={{
+                  opacity: 0,
+                  y: 25,
+                }}
+                animate={{
+                  opacity: 1,
+                  y: 0,
+                }}
+                transition={{
+                  duration: 0.6,
+                }}
+                className={
+                  index === letter.length - 1
+                    ? "font-semibold text-rose-600"
+                    : ""
+                }
+              >
+                {text}
+              </motion.p>
+            ))}
           </div>
-
         </div>
 
         <div className="mt-12 text-center">
-
-          <p className="text-lg text-gray-600">
-            
+          <p className="text-base text-gray-600 sm:text-lg">
             with great affection,
           </p>
 
-          <p className="mt-2 text-2xl font-bold text-rose-600">
+          <p className="mt-2 text-xl font-bold text-rose-600 sm:text-2xl">
             — Odoi ❤️
           </p>
-
         </div>
 
-        <div className="mt-12 flex flex-wrap justify-center gap-4">
+        {visibleParagraphs >= letter.length && (
+          <>
+            <motion.div
+              initial={{
+                opacity: 0,
+                y: 40,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+              }}
+              transition={{
+                duration: 0.8,
+              }}
+              className="mt-10 text-center"
+            >
+              <img
+                src={finalPhoto}
+                alt="Our Memory"
+                className="mx-auto w-full max-w-[260px] rounded-3xl shadow-2xl sm:max-w-sm md:max-w-md"
+              />
 
-          <button
-            onClick={() => navigate("/menu")}
-            className="rounded-full bg-rose-500 px-8 py-3 font-semibold text-white transition hover:scale-105 hover:bg-rose-600"
-          >
-            ❤️ Kembali ke Menu
-          </button>
+              <motion.img
+              src={teddySticker}
+              alt=""
+              aria-hidden="true"
+              className="mx-auto mt-6 w-20 sm:mt-8 sm:w-28"
+              animate={{
+                y: [0, -8, 0],
+              }}
+              transition={{
+                repeat: Infinity,
+                duration: 2,
+              }}
+            />
 
-          <button
-            onClick={handleRestart}
-            className="rounded-full border-2 border-rose-500 px-8 py-3 font-semibold text-rose-600 transition hover:bg-rose-500 hover:text-white"
-          >
-            🔄 Mulai Lagi
-          </button>
+              <p className="mt-5 px-2 text-base italic text-gray-600 sm:text-lg">
+                "Satu foto ini mungkin sederhana.
+                <br />
+                Tapi buat aku,
+                kenangannya akan selalu spesial. ❤️"
+              </p>
+            </motion.div>
 
-        </div>
+            <motion.div
+              initial={{
+                opacity: 0,
+                y: 40,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+              }}
+              transition={{
+                delay: 0.5,
+                duration: 0.8,
+              }}
+            >
+              <BirthdayCake
+                onFinished={() => setCakeFinished(true)}
+              />
+            </motion.div>
+          </>
+        )}
 
-        <div className="mt-12 border-t pt-6 text-center text-sm text-gray-400">
-          Website ini dibuat khusus untukmu.
-          <br />
-          © 2026 • Made with ❤️ by Odoi
-        </div>
+        {cakeFinished && (
+          <>
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="mt-10 px-3 text-center text-lg font-semibold text-rose-600 sm:text-xl"
+            >
+              ❤️ Terima kasih sudah sampai di akhir perjalanan ini.
+            </motion.p>
 
-      </motion.div>
+            <motion.div
+              initial={{
+                opacity: 0,
+                y: 40,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+              }}
+              transition={{
+                duration: 0.8,
+              }}
+              className="mt-10 flex flex-col items-center gap-4 px-2 sm:flex-row sm:justify-center"
+            >
+              <button
+                type="button"
+                onClick={() => navigate("/menu")}
+                className="w-full rounded-full bg-rose-500 px-8 py-3 text-base font-semibold text-white transition hover:scale-105 hover:bg-rose-600 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-rose-300 active:scale-95 sm:w-auto"
+              >
+                ❤️ Kembali ke Menu
+              </button>
 
+              <button
+                type="button"
+                onClick={handleRestart}
+                className="w-full rounded-full border-2 border-rose-500 px-8 py-3 text-base font-semibold text-rose-600 transition hover:bg-rose-500 hover:text-white focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-rose-300 active:scale-95 sm:w-auto"
+              >
+                🔄 Mulai Lagi
+              </button>
+            </motion.div>
+          </>
+        )}
+
+        <div className="mt-10 border-t pt-6 text-center text-xs sm:text-sm text-gray-400 leading-6">
+  Website ini dibuat khusus untukmu.
+  <br />
+  © 2026 • Made with ❤️ by Odoi
+</div>
+            </motion.div>
     </main>
   );
 }

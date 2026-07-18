@@ -15,7 +15,6 @@ function GiftBox() {
 
     setOpening(true);
 
-    // Confetti
     confetti({
       particleCount: 180,
       spread: 100,
@@ -24,16 +23,27 @@ function GiftBox() {
       },
     });
 
-    // Tunggu animasi selesai
     setTimeout(() => {
       navigate("/menu");
     }, 2200);
   };
 
+  // FIX: Enter/Space now trigger the box the same way a click does, since
+  // it's now a keyboard-focusable control (see role="button" below).
+  const handleBoxKeyDown = (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      handleOpenGift();
+    }
+  };
+
   return (
+    // FIX: removed the "px-5" Tailwind class here — GiftBox.css already
+    // sets padding on .gift-wrapper (including its own mobile override in
+    // a media query), so having both was an unpredictable double-padding
+    // conflict. Padding is now controlled from one place only.
     <div className="gift-wrapper">
       <AnimatePresence>
-
         <motion.div
           initial={{
             opacity: 0,
@@ -47,11 +57,20 @@ function GiftBox() {
           transition={{
             duration: 1,
           }}
+          className="text-center"
         >
-          <div className="gift-box">
-
-            {/* Cahaya */}
-
+          {/* FIX: the box already looked clickable (cursor: pointer,
+              hover scale in the CSS) but had no onClick — only the button
+              below it actually opened the gift. Now the box itself opens
+              it too, and is reachable/operable by keyboard. */}
+          <div
+            className="gift-box"
+            role="button"
+            tabIndex={0}
+            aria-label="Buka hadiah"
+            onClick={handleOpenGift}
+            onKeyDown={handleBoxKeyDown}
+          >
             {opening && (
               <motion.div
                 className="light"
@@ -80,7 +99,6 @@ function GiftBox() {
             <div className="ribbon-v" />
 
             <div className="ribbon-h" />
-
           </div>
 
           <motion.h1
@@ -95,7 +113,16 @@ function GiftBox() {
             transition={{
               delay: 0.3,
             }}
-            className="mt-12 text-5xl font-bold text-rose-600"
+            className="
+            mt-10
+            text-3xl
+            sm:text-4xl
+            md:text-5xl
+            font-bold
+            text-rose-600
+            leading-tight
+            break-words
+            "
           >
             Selamat Ulang Tahun 🤍
           </motion.h1>
@@ -110,13 +137,24 @@ function GiftBox() {
             transition={{
               delay: 0.6,
             }}
-            className="mt-5 text-lg text-gray-700"
+            className="
+            mx-auto
+            mt-5
+            max-w-md
+            px-2
+            text-base
+            sm:text-lg
+            leading-7
+            text-gray-700
+            "
           >
             Semoga hadiah kecil ini
+            <br />
             bisa bikin hari kamu jadi lebih spesial.
           </motion.p>
 
           <motion.button
+            type="button"
             whileHover={{
               scale: 1.05,
             }}
@@ -124,13 +162,30 @@ function GiftBox() {
               scale: 0.95,
             }}
             onClick={handleOpenGift}
-            className="mt-8 rounded-full bg-rose-500 px-8 py-4 text-lg font-semibold text-white shadow-xl transition hover:bg-rose-600"
+            className="
+            mt-8
+            w-full
+            max-w-xs
+            rounded-full
+            bg-rose-500
+            px-8
+            py-4
+            text-base
+            sm:text-lg
+            font-semibold
+            text-white
+            shadow-xl
+            transition
+            hover:bg-rose-600
+            focus-visible:outline-none
+            focus-visible:ring-4
+            focus-visible:ring-rose-300
+            active:scale-95
+            "
           >
             Buka Hadiahnya 🎁
           </motion.button>
-
         </motion.div>
-
       </AnimatePresence>
     </div>
   );

@@ -1,12 +1,100 @@
 @import "tailwindcss";
 
+/* ============================= */
+/* Reset */
+/* ============================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 html,
 body,
 #root {
-  margin: 0;
+  width: 100%;
   min-height: 100%;
+  margin: 0;
+  padding: 0;
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ============================= */
+/* Body */
+/* ============================= */
 
 body {
   font-family: system-ui, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ============================= */
+/* Responsive */
+/* ============================= */
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ============================= */
+/* Root */
+/* ============================= */
+
+#root {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* ============================= */
+/* Motion safety */
+/* ============================= */
+/* FIX (new): the app leans heavily on framer-motion — floating stickers,
+   a spinning CD, pulsing stars, rotating gift icons, all looping forever.
+   For visitors with "Reduce motion" turned on at the OS level (a real
+   accessibility need, not just a preference), this tones the endless
+   loops down to a quick fade instead of turning them off outright, since
+   framer-motion's inline animate props aren't controlled by CSS alone.
+   scroll-behavior is also reset to auto so smooth-scroll doesn't fight it. */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

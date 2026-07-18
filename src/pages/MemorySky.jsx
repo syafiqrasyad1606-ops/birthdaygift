@@ -23,15 +23,15 @@ function MemorySky() {
 
   const starPositions = [
     { top: "10%", left: "18%" },
-    { top: "18%", left: "70%" },
-    { top: "28%", left: "40%" },
-    { top: "35%", left: "82%" },
-    { top: "42%", left: "15%" },
-    { top: "50%", left: "58%" },
-    { top: "60%", left: "32%" },
-    { top: "68%", left: "76%" },
-    { top: "76%", left: "48%" },
-    { top: "82%", left: "10%" },
+    { top: "18%", left: "72%" },
+    { top: "28%", left: "42%" },
+    { top: "36%", left: "82%" },
+    { top: "44%", left: "15%" },
+    { top: "52%", left: "58%" },
+    { top: "62%", left: "30%" },
+    { top: "70%", left: "76%" },
+    { top: "80%", left: "48%" },
+    { top: "86%", left: "12%" },
   ];
 
   const handleStarClick = (id) => {
@@ -54,8 +54,11 @@ function MemorySky() {
       completeGift("memory");
 
       confetti({
-        particleCount: 250,
+        particleCount: 220,
         spread: 120,
+        origin: {
+          y: 0.65,
+        },
       });
     }
   }, [
@@ -65,9 +68,22 @@ function MemorySky() {
   ]);
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-black">
+    // FIX: min-h-[100dvh] instead of min-h-screen (accurate height on
+    // mobile browsers) — overflow-hidden was already here and is kept,
+    // it's what stops the glow blobs / moon from causing a horizontal
+    // scrollbar on narrow phones.
+    <main className="relative min-h-[100dvh] overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-black px-4 py-8 sm:px-8 sm:py-10 md:px-10">
+
+      {/* Background Glow */}
+
+      <div className="pointer-events-none absolute -left-24 -top-24 h-56 w-56 rounded-full bg-yellow-300/10 blur-3xl sm:h-96 sm:w-96" />
+
+      <div className="pointer-events-none absolute -bottom-32 -right-24 h-64 w-64 rounded-full bg-sky-500/10 blur-3xl sm:h-[420px] sm:w-[420px]" />
 
       {/* Moon */}
+      {/* FIX: nudged in from the edge on mobile (right-3 vs right-4, smaller
+          text) so it can't get clipped, plus pointer-events-none/aria-hidden
+          since it's purely decorative. */}
 
       <motion.div
         animate={{
@@ -75,35 +91,89 @@ function MemorySky() {
         }}
         transition={{
           repeat: Infinity,
-          duration: 4,
+          duration: 5,
         }}
-        className="absolute right-20 top-12 text-7xl"
+        aria-hidden="true"
+        className="pointer-events-none absolute right-3 top-4 text-4xl sm:right-10 sm:top-8 sm:text-6xl md:right-16 md:text-7xl"
       >
         🌙
       </motion.div>
 
       {/* Header */}
 
-      <div className="pt-10 text-center">
+      <motion.div
+        initial={{
+          opacity: 0,
+          y: -30,
+        }}
+        animate={{
+          opacity: 1,
+          y: 0,
+        }}
+        className="relative z-10 text-center"
+      >
 
-        <h1 className="text-5xl font-bold text-white">
+        <h1 className="break-words text-3xl font-bold text-white sm:text-4xl md:text-5xl">
           Langit Kenangan ⭐
         </h1>
 
-        <p className="mt-4 text-gray-300">
+        <p className="mx-auto mt-5 max-w-2xl px-2 text-sm leading-6 text-gray-300 sm:text-lg sm:leading-8">
           Coba klik semua bintang.
-          Di setiap bintang,
-        ada satu pesan kecil buat kamu. ❤️
+          <br />
+          Di setiap bintang ada satu pesan kecil
+          yang sudah aku siapkan untukmu. ❤️
         </p>
 
-      </div>
+        {/* Progress */}
 
-      {/* Stars */}
+        <div className="mx-auto mt-8 w-full max-w-md px-2">
 
-      <div className="relative mt-20 h-[600px]">
+          <div className="mb-3 flex items-center justify-between gap-2 text-sm font-semibold text-gray-300">
 
-        {messages.map((message, index) => (
+            <span>Progress</span>
 
+            <span>
+              {openedStars.length}/{messages.length}
+            </span>
+
+          </div>
+
+          <div
+            className="h-3 overflow-hidden rounded-full bg-white/20"
+            role="progressbar"
+            aria-valuenow={openedStars.length}
+            aria-valuemin={0}
+            aria-valuemax={messages.length}
+            aria-label="Bintang yang sudah dibuka"
+          >
+
+            <motion.div
+              initial={{
+                width: 0,
+              }}
+              animate={{
+                width: `${(openedStars.length / messages.length) * 100}%`,
+              }}
+              transition={{
+                duration: 0.5,
+              }}
+              className="h-full rounded-full bg-gradient-to-r from-yellow-300 via-amber-400 to-yellow-500"
+            />
+
+          </div>
+
+        </div>
+
+      </motion.div>
+
+      {/* Star Area */}
+      {/* FIX: h-[60vh] -> h-[60dvh] so the star field's height stays stable
+          on mobile instead of shifting as the browser chrome shows/hides
+          (which used to make the lowest stars jump around / go offscreen). */}
+
+      <div className="relative mx-auto mt-10 h-[60dvh] min-h-[480px] max-w-6xl sm:mt-12 sm:h-[650px] sm:min-h-[520px] lg:h-[720px]">
+
+              {messages.map((message, index) => (
           <Star
             key={message.id}
             id={message.id}
@@ -112,29 +182,43 @@ function MemorySky() {
             top={starPositions[index].top}
             left={starPositions[index].left}
           />
-
         ))}
-
       </div>
 
       {/* Footer */}
 
-      <div className="pb-12 text-center">
-
-        <p className="text-xl font-semibold text-white">
-
-          {openedStars.length} / {messages.length} Satu Kenangan 💌
-
+      <motion.div
+        initial={{
+          opacity: 0,
+          y: 20,
+        }}
+        animate={{
+          opacity: 1,
+          y: 0,
+        }}
+        transition={{
+          delay: 0.3,
+        }}
+        className="relative z-10 pb-10 text-center"
+      >
+        <p className="text-lg font-semibold text-white sm:text-xl">
+          {openedStars.length} / {messages.length} Memories Found 💌
         </p>
 
-        <button
+        <motion.button
+          type="button"
+          whileHover={{
+            scale: 1.05,
+          }}
+          whileTap={{
+            scale: 0.96,
+          }}
           onClick={() => navigate("/menu")}
-          className="mt-8 rounded-full bg-rose-500 px-8 py-3 text-white transition hover:bg-rose-600"
+          className="mt-8 rounded-full bg-rose-500 px-6 py-3 text-white shadow-lg transition-all duration-300 hover:bg-rose-600 hover:shadow-xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-rose-300 active:scale-95 sm:px-8"
         >
-          ← Back
-        </button>
-
-      </div>
+          ← Back to Menu
+        </motion.button>
+      </motion.div>
 
       {/* Modal */}
 
@@ -145,7 +229,6 @@ function MemorySky() {
         total={messages.length}
         onClose={closeModal}
       />
-
     </main>
   );
 }
