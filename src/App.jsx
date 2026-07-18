@@ -15,17 +15,21 @@ function App() {
   return (
     <ProgressProvider>
       <BrowserRouter>
+
+        <main className="pb-40 md:pb-0">
+          <Routes>
+            <Route path="/" element={<IntroScreen />} />
+            <Route path="/gift" element={<Home />} />
+            <Route path="/menu" element={<GiftMenu />} />
+            <Route path="/memory" element={<MemorySky />} />
+            <Route path="/gallery" element={<Gallery />} />
+            <Route path="/music" element={<Music />} />
+            <Route path="/final" element={<FinalGift />} />
+          </Routes>
+        </main>
+
         <MusicPlayer />
 
-        <Routes>
-          <Route path="/" element={<IntroScreen />} />
-          <Route path="/gift" element={<Home />} />
-          <Route path="/menu" element={<GiftMenu />} />
-          <Route path="/memory" element={<MemorySky />} />
-          <Route path="/gallery" element={<Gallery />} />
-          <Route path="/music" element={<Music />} />
-          <Route path="/final" element={<FinalGift />} />
-        </Routes>
       </BrowserRouter>
     </ProgressProvider>
   );
