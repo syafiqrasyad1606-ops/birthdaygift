@@ -7,11 +7,7 @@ function TimelineCard({
   index,
   onClick,
 }) {
-  // FIX: this card was a div-like element with onClick but no keyboard
-  // support — a mouse/touch user could open it, but someone tabbing
-  // through on a laptop/PC couldn't reach or activate it at all. Adding
-  // role="button" + tabIndex + onKeyDown makes it fully keyboard operable,
-  // and focus-visible:ring gives it a visible focus state.
+  
   const handleKeyDown = (e) => {
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
@@ -49,7 +45,7 @@ function TimelineCard({
     >
       <div className="overflow-hidden rounded-[28px] bg-white/90 shadow-xl backdrop-blur transition-all duration-300 hover:shadow-rose-200">
 
-        {/* Image */}
+        
 
         <div className="overflow-hidden">
           <img
@@ -60,7 +56,7 @@ function TimelineCard({
           />
         </div>
 
-        {/* Content */}
+        
 
         <div className="p-5 sm:p-7 md:p-8">
 
