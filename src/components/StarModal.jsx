@@ -8,10 +8,7 @@ function StarModal({
   total,
   onClose,
 }) {
-  // FIX: lock background scroll while the modal is open, and let Esc
-  // close it. Without this, on a phone you could scroll the star field
-  // underneath the modal at the same time as scrolling the modal itself,
-  // which feels broken.
+  
   useEffect(() => {
     if (!isOpen) return;
 
@@ -33,7 +30,7 @@ function StarModal({
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* Background */}
+          
           <motion.div
             className="fixed inset-0 z-40 bg-black/70 backdrop-blur-sm"
             initial={{ opacity: 0 }}
@@ -42,12 +39,7 @@ function StarModal({
             onClick={onClose}
           />
 
-          {/* Modal */}
-          {/* FIX: added max-h-[85dvh] + overflow-y-auto so a long message
-              (or a short/landscape phone screen) can never push the modal
-              taller than the viewport — it now scrolls internally instead
-              of getting clipped top/bottom. Added role="dialog" so screen
-              readers announce it properly. */}
+          
           <motion.div
             role="dialog"
             aria-modal="true"
@@ -74,7 +66,7 @@ function StarModal({
               damping: 18,
             }}
           >
-            {/* Icon */}
+            
             <motion.div
               aria-hidden="true"
               animate={{
@@ -90,17 +82,17 @@ function StarModal({
               🌟
             </motion.div>
 
-            {/* Title */}
+            
             <h2 className="mt-5 text-2xl font-bold text-rose-600 sm:text-3xl">
               Memory Found
             </h2>
 
-            {/* Message */}
+            
             <p className="mt-5 break-words text-base leading-7 text-gray-700 sm:mt-6 sm:text-lg sm:leading-8">
               {message}
             </p>
 
-            {/* Progress */}
+            
             <div className="mt-8">
               <div
                 className="mx-auto h-3 w-full overflow-hidden rounded-full bg-gray-200"
@@ -126,7 +118,7 @@ function StarModal({
               </p>
             </div>
 
-            {/* Button */}
+            
             <motion.button
               type="button"
               whileHover={{
