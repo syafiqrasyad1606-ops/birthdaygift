@@ -6,8 +6,7 @@ function GalleryCard({
   index,
   onClick,
 }) {
-  // FIX: this card was a plain div with onClick — unreachable and
-  // unactivatable by keyboard. Same fix pattern as TimelineCard.jsx.
+
   const handleKeyDown = (e) => {
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
@@ -42,9 +41,7 @@ function GalleryCard({
       aria-label={`Lihat foto: ${title}`}
       className="group cursor-pointer overflow-hidden rounded-3xl bg-white shadow-xl outline-none transition focus-visible:ring-4 focus-visible:ring-rose-300"
     >
-      {/* FIX: fixed h-72 (288px) on every screen size replaced with a
-          scale that's shorter on phones so the card doesn't eat most of
-          a small screen before the title/caption are even visible. */}
+
       <div className="overflow-hidden">
 
         <img
