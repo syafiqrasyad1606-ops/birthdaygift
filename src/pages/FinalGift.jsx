@@ -60,7 +60,6 @@ function FinalGift() {
 
   if (!isEverythingCompleted) {
   return (
-    // FIX: min-h-screen -> min-h-[100dvh] for accurate mobile height.
     <main className="relative flex min-h-[100dvh] items-center justify-center overflow-hidden bg-gradient-to-br from-pink-100 via-rose-50 to-pink-200 px-4 py-8">
 
       <motion.img
@@ -135,14 +134,8 @@ function FinalGift() {
 }
 
   return (
- // FIX: min-h-screen -> min-h-[100dvh].
+
  <main className="relative min-h-[100dvh] overflow-hidden bg-gradient-to-br from-pink-100 via-rose-50 to-pink-200 px-4 pt-10 pb-24 sm:px-6 sm:pt-14 sm:pb-24 md:pt-16">
-    {/* Floating Decoration */}
-    {/* FIX: all decorative stickers below given aria-hidden (screen readers
-        were reading "Heart", "Rose", "Camera", "Gift", "Star", "Teddy" one
-        after another before ever reaching the actual letter). The two that
-        were always visible (heart, star) are nudged in from the screen
-        edge on mobile so they can't get clipped. */}
 
 <motion.img
   src={heartSticker}
@@ -231,7 +224,6 @@ function FinalGift() {
   }}
 />
 
-    {/* Card Utama */}
 
       <motion.div
         initial={{ opacity: 0, y: 40 }}
