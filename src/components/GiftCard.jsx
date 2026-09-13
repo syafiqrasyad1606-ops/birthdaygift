@@ -5,7 +5,7 @@ function GiftCard({
   icon,
   title,
   description,
-  status = "ready", // ready | completed | locked
+  status = "ready", 
   onClick,
 }) {
   const isLocked = status === "locked";
@@ -46,7 +46,7 @@ function GiftCard({
         }
       `}
     >
-      {/* Header */}
+      
       <div className="flex items-center justify-between gap-3">
         <div className="text-4xl sm:text-5xl" aria-hidden="true">{icon}</div>
 
@@ -57,17 +57,17 @@ function GiftCard({
         </div>
       </div>
 
-      {/* Title */}
+      
       <h2 className="mt-6 break-words text-xl font-bold text-gray-800 sm:text-2xl">
         {title}
       </h2>
 
-      {/* Description */}
+     
       <p className="mt-3 text-sm leading-6 text-gray-600 sm:text-base sm:leading-7">
         {description}
       </p>
 
-      {/* Bottom */}
+     
       <div className="mt-8 flex items-center justify-between">
 
         {isCompleted ? (
@@ -81,10 +81,7 @@ function GiftCard({
             Locked
           </div>
         ) : (
-          // FIX: added type="button" and a focus-visible ring — this was
-          // the only actually-interactive element in the card, but had no
-          // visible focus state for keyboard/laptop users.
-          <button
+          
             type="button"
             onClick={onClick}
             className="flex items-center gap-2 rounded-full bg-rose-500 px-5 py-3 font-semibold text-white transition hover:bg-rose-600 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-rose-300 active:scale-95"
