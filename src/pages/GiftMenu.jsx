@@ -53,22 +53,13 @@ function GiftMenu() {
   ];
 
   return (
-    // FIX: min-h-[100dvh] instead of min-h-screen so the page doesn't
-    // clip/jump on mobile browsers when the address bar shows/hides.
-    // overflow-hidden was already here (good — it's what keeps the two
-    // background blur blobs from creating a horizontal scrollbar), kept as-is.
     <main className="relative min-h-[100dvh] overflow-hidden bg-gradient-to-br from-pink-100 via-rose-50 to-pink-200 px-4 py-8 sm:px-8 sm:py-10 md:px-10">
 
-      {/* Background Blur */}
 
       <div className="pointer-events-none absolute -left-24 -top-24 h-56 w-56 rounded-full bg-pink-300 opacity-40 blur-3xl sm:h-96 sm:w-96" />
 
       <div className="pointer-events-none absolute -bottom-24 -right-24 h-64 w-64 rounded-full bg-rose-300 opacity-40 blur-3xl sm:h-[420px] sm:w-[420px]" />
 
-      {/* Floating Decorations */}
-      {/* FIX: alt text on purely decorative stickers removed and replaced
-          with aria-hidden, so screen readers skip them instead of reading
-          "Heart", "Rose", "Star", "Teddy" out loud between real content. */}
 
       <motion.img
         src={heartSticker}
@@ -131,7 +122,6 @@ function GiftMenu() {
 
       <div className="relative z-10 mx-auto w-full max-w-6xl">
 
-        {/* HEADER */}
 
         <motion.div
           initial={{
@@ -175,7 +165,6 @@ function GiftMenu() {
             karena semuanya dibuat khusus untuk kamu. 🌸
           </p>
 
-          {/* Progress */}
 
           <div className="mx-auto mt-10 w-full max-w-xl px-2">
 
@@ -217,9 +206,6 @@ function GiftMenu() {
 
         </motion.div>
 
-        {/* Gift Cards */}
-        {/* FIX: min-w-0 on the grid keeps long words in the description
-            (or a narrow phone) from ever forcing a card wider than its
             column, which is what causes horizontal scrolling in CSS grids. */}
 
         <div className="mt-14 grid min-w-0 gap-6 md:grid-cols-2 xl:grid-cols-3">
@@ -246,7 +232,6 @@ function GiftMenu() {
               }}
               className="flex min-w-0 flex-col rounded-[28px] bg-white/85 p-5 shadow-xl backdrop-blur-xl transition-all duration-300 hover:shadow-2xl sm:rounded-[32px] sm:p-7"
             >
-              {/* Icon */}
 
               <motion.div
                 animate={{
@@ -267,19 +252,15 @@ function GiftMenu() {
                 />
               </motion.div>
 
-              {/* Title */}
 
               <h2 className="mt-5 break-words text-xl font-bold text-gray-800 sm:text-2xl md:text-3xl">
                 {card.title}
               </h2>
 
-              {/* Description */}
-
               <p className="mt-4 flex-1 text-sm leading-6 text-gray-600 sm:text-base sm:leading-8">
                 {card.description}
               </p>
 
-              {/* Footer */}
 
               <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <span
@@ -304,7 +285,6 @@ function GiftMenu() {
           ))}
         </div>
 
-                {/* ================= FINAL GIFT ================= */}
 
         <motion.section
           initial={{
@@ -386,8 +366,6 @@ function GiftMenu() {
             </motion.button>
           </div>
         </motion.section>
-
-        {/* ================= FOOTER ================= */}
 
         <motion.footer
           initial={{
