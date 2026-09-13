@@ -42,12 +42,9 @@ function Music() {
   ];
 
   return (
-    // FIX: min-h-[100dvh] instead of min-h-screen. overflow-hidden was
-    // already present and is kept — it's what stops the two blur blobs
-    // from causing a horizontal scrollbar on narrow phones.
+
     <main className="relative min-h-[100dvh] overflow-hidden bg-gradient-to-br from-pink-100 via-rose-50 to-pink-200 px-4 py-8 sm:px-8 sm:py-10 md:px-10">
 
-      {/* Blur Background */}
 
       <div className="pointer-events-none absolute -left-24 -top-24 h-64 w-64 rounded-full bg-pink-300 opacity-40 blur-3xl sm:h-96 sm:w-96" />
 
@@ -55,7 +52,6 @@ function Music() {
 
       <div className="relative z-10 mx-auto w-full max-w-3xl">
 
-        {/* Header */}
 
         <motion.div
           initial={{
@@ -98,7 +94,6 @@ function Music() {
 
         </motion.div>
 
-        {/* Music Card */}
 
         <motion.section
           initial={{
@@ -117,10 +112,6 @@ function Music() {
 
           <div className="flex flex-col items-center">
 
-            {/* CD */}
-            {/* FIX: capped with a viewport-relative max-width (85vw) so the
-                spinning CD art can never be wider than the screen itself
-                on very small phones, on top of its existing w-40/52/60. */}
 
             <motion.img
               src={cdSticker}
@@ -147,7 +138,6 @@ function Music() {
 
           </div>
 
-          {/* Lyrics */}
 
           <div className="mt-10 space-y-4 sm:space-y-5">
 
@@ -175,7 +165,7 @@ function Music() {
 
         </motion.section>
 
-        {/* Footer */}
+
 
         <motion.footer
           initial={{
