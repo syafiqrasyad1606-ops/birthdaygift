@@ -28,8 +28,7 @@ function GiftBox() {
     }, 2200);
   };
 
-  // FIX: Enter/Space now trigger the box the same way a click does, since
-  // it's now a keyboard-focusable control (see role="button" below).
+
   const handleBoxKeyDown = (e) => {
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
@@ -38,11 +37,7 @@ function GiftBox() {
   };
 
   return (
-    // FIX: removed the "px-5" Tailwind class here — GiftBox.css already
-    // sets padding on .gift-wrapper (including its own mobile override in
-    // a media query), so having both was an unpredictable double-padding
-    // conflict. Padding is now controlled from one place only.
-    <div className="gift-wrapper">
+
       <AnimatePresence>
         <motion.div
           initial={{
@@ -59,10 +54,7 @@ function GiftBox() {
           }}
           className="text-center"
         >
-          {/* FIX: the box already looked clickable (cursor: pointer,
-              hover scale in the CSS) but had no onClick — only the button
-              below it actually opened the gift. Now the box itself opens
-              it too, and is reachable/operable by keyboard. */}
+
           <div
             className="gift-box"
             role="button"
