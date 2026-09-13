@@ -80,10 +80,7 @@ function MusicPlayer() {
     seekToPercent(percent);
   };
 
-  // FIX: the seek bar was a bare <div onClick>, unreachable by keyboard
-  // and invisible to screen readers. Added role="slider" + keyboard
-  // support (arrow keys nudge by 5s) so it behaves like a real control.
-  const handleSeekKeyDown = (e) => {
+  
     if (!duration) return;
 
     if (e.key === "ArrowRight") {
@@ -116,9 +113,7 @@ function MusicPlayer() {
         transition={{
           duration: 0.5,
         }}
-        // FIX: added a safe-area-aware bottom offset (on top of the
-        // existing bottom-4/6) so on notched/gesture-bar phones (iPhone
-        // etc.) the player doesn't sit under the home-indicator area.
+        
         style={{
     paddingBottom:
         "max(env(safe-area-inset-bottom),6px)",
@@ -149,7 +144,7 @@ md:w-[360px]
 lg:w-[380px]
 "
       >
-        {/* Top */}
+        
 
         <div className="flex items-center gap-3 sm:gap-4">
 
@@ -251,7 +246,7 @@ className="ml-0.5 text-sm sm:text-base"
 
         </div>
 
-        {/* Progress */}
+        
 
         <div className="mt-4">
 
