@@ -9,9 +9,7 @@ function GalleryModal({
   description,
   onClose,
 }) {
-  // FIX: same background-scroll-lock + Esc-to-close as StarModal, so the
-  // page underneath can't scroll independently of the modal, and desktop/
-  // keyboard users have a way to close it besides hunting for the button.
+
   useEffect(() => {
     if (!isOpen) return;
 
@@ -33,7 +31,7 @@ function GalleryModal({
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* Background */}
+
           <motion.div
             className="fixed inset-0 z-40 bg-black/80 backdrop-blur-md"
             initial={{ opacity: 0 }}
@@ -42,11 +40,6 @@ function GalleryModal({
             onClick={onClose}
           />
 
-          {/* Modal */}
-          {/* FIX: added max-h-[90dvh] + flex column + overflow-y-auto on the
-              content area, so a long description on a short/landscape
-              screen scrolls inside the modal instead of the modal
-              overflowing top/bottom of the viewport. */}
           <motion.div
             initial={{
               opacity: 0,
@@ -73,7 +66,6 @@ function GalleryModal({
             aria-label={title || "Foto"}
             className="fixed left-1/2 top-1/2 z-50 flex max-h-[90dvh] w-[94%] max-w-3xl -translate-x-1/2 -translate-y-1/2 flex-col overflow-y-auto rounded-[28px] bg-white shadow-2xl"
           >
-            {/* Close Button */}
             <button
               type="button"
               onClick={onClose}
@@ -83,7 +75,6 @@ function GalleryModal({
               <FaTimes />
             </button>
 
-            {/* Photo */}
             <div className="shrink-0 overflow-hidden bg-gray-100">
               <img
                 src={photo}
@@ -93,7 +84,6 @@ function GalleryModal({
               />
             </div>
 
-            {/* Content */}
             <div className="p-5 sm:p-7 md:p-8">
               <h2 className="break-words text-2xl font-bold text-rose-600 sm:text-3xl">
                 {title}
