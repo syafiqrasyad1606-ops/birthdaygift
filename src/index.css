@@ -1,9 +1,5 @@
 @import "tailwindcss";
 
-/* ============================= */
-/* Reset */
-/* ============================= */
-
 *,
 *::before,
 *::after {
@@ -23,9 +19,6 @@ html {
   scroll-behavior: smooth;
 }
 
-/* ============================= */
-/* Body */
-/* ============================= */
 
 body {
   font-family: system-ui, sans-serif;
@@ -33,10 +26,6 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
-
-/* ============================= */
-/* Responsive */
-/* ============================= */
 
 img,
 picture,
@@ -64,25 +53,11 @@ a {
   color: inherit;
 }
 
-/* ============================= */
-/* Root */
-/* ============================= */
 
 #root {
   width: 100%;
   overflow-x: hidden;
 }
-
-/* ============================= */
-/* Motion safety */
-/* ============================= */
-/* FIX (new): the app leans heavily on framer-motion — floating stickers,
-   a spinning CD, pulsing stars, rotating gift icons, all looping forever.
-   For visitors with "Reduce motion" turned on at the OS level (a real
-   accessibility need, not just a preference), this tones the endless
-   loops down to a quick fade instead of turning them off outright, since
-   framer-motion's inline animate props aren't controlled by CSS alone.
-   scroll-behavior is also reset to auto so smooth-scroll doesn't fight it. */
 
 @media (prefers-reduced-motion: reduce) {
   html {
