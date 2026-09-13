@@ -2,8 +2,7 @@ import GiftBox from "../components/GiftBox";
 
 function Home() {
   return (
-    // FIX: min-h-screen -> min-h-[100dvh] for accurate height on mobile
-    // browsers (consistent with every other page).
+
     <main
       className="
       min-h-[100dvh]
