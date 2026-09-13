@@ -68,22 +68,14 @@ function MemorySky() {
   ]);
 
   return (
-    // FIX: min-h-[100dvh] instead of min-h-screen (accurate height on
-    // mobile browsers) — overflow-hidden was already here and is kept,
-    // it's what stops the glow blobs / moon from causing a horizontal
-    // scrollbar on narrow phones.
+
     <main className="relative min-h-[100dvh] overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-black px-4 py-8 sm:px-8 sm:py-10 md:px-10">
 
-      {/* Background Glow */}
 
       <div className="pointer-events-none absolute -left-24 -top-24 h-56 w-56 rounded-full bg-yellow-300/10 blur-3xl sm:h-96 sm:w-96" />
 
       <div className="pointer-events-none absolute -bottom-32 -right-24 h-64 w-64 rounded-full bg-sky-500/10 blur-3xl sm:h-[420px] sm:w-[420px]" />
 
-      {/* Moon */}
-      {/* FIX: nudged in from the edge on mobile (right-3 vs right-4, smaller
-          text) so it can't get clipped, plus pointer-events-none/aria-hidden
-          since it's purely decorative. */}
 
       <motion.div
         animate={{
@@ -99,7 +91,7 @@ function MemorySky() {
         🌙
       </motion.div>
 
-      {/* Header */}
+
 
       <motion.div
         initial={{
@@ -124,7 +116,6 @@ function MemorySky() {
           yang sudah aku siapkan untukmu. ❤️
         </p>
 
-        {/* Progress */}
 
         <div className="mx-auto mt-8 w-full max-w-md px-2">
 
@@ -166,10 +157,6 @@ function MemorySky() {
 
       </motion.div>
 
-      {/* Star Area */}
-      {/* FIX: h-[60vh] -> h-[60dvh] so the star field's height stays stable
-          on mobile instead of shifting as the browser chrome shows/hides
-          (which used to make the lowest stars jump around / go offscreen). */}
 
       <div className="relative mx-auto mt-10 h-[60dvh] min-h-[480px] max-w-6xl sm:mt-12 sm:h-[650px] sm:min-h-[520px] lg:h-[720px]">
 
@@ -185,7 +172,6 @@ function MemorySky() {
         ))}
       </div>
 
-      {/* Footer */}
 
       <motion.div
         initial={{
@@ -220,7 +206,6 @@ function MemorySky() {
         </motion.button>
       </motion.div>
 
-      {/* Modal */}
 
       <StarModal
         isOpen={selectedMessage !== null}
