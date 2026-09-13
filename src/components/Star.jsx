@@ -17,9 +17,7 @@ function Star({
       }}
       aria-label={opened ? "Kenangan yang sudah dibuka" : "Buka kenangan"}
       aria-pressed={opened}
-      // FIX: added focus-visible ring so the star is visibly focusable
-      // when navigated to with a keyboard on laptop/PC (it had
-      // outline-none with nothing to replace it).
+      
       className="absolute flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full outline-none touch-manipulation focus-visible:ring-4 focus-visible:ring-yellow-300/70 sm:h-14 sm:w-14 md:h-16 md:w-16"
       initial={{
         scale: 0,
