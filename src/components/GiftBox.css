@@ -1,10 +1,5 @@
 .gift-wrapper {
-  /* FIX: was min-height: 100vh, but this div sits inside Home.jsx's
-     <main> which already has min-h-screen (now min-h-[100dvh]) with its
-     own padding. Two stacked 100vh minimums forced this element taller
-     than the actual visible viewport, causing an extra vertical scroll
-     on some phones. Using 100% makes it fill whatever height the parent
-     already gives it instead of demanding another full screen. */
+
   min-height: 100%;
   width: 100%;
   display: flex;
@@ -13,9 +8,6 @@
   padding: 20px;
 }
 
-/* =============================== */
-/* Gift Box */
-/* =============================== */
 
 .gift-box {
   position: relative;
@@ -30,17 +22,13 @@
   transform: scale(1.04);
 }
 
-/* FIX: visible focus state for keyboard users, since the box is now
-   focusable (see GiftBox.jsx). */
+
 .gift-box:focus-visible {
   outline: 4px solid #fda4af;
   outline-offset: 4px;
   border-radius: 20px;
 }
 
-/* =============================== */
-/* Lid */
-/* =============================== */
 
 .lid {
   position: absolute;
@@ -59,9 +47,6 @@
   z-index: 10;
 }
 
-/* =============================== */
-/* Box */
-/* =============================== */
 
 .box {
   position: absolute;
@@ -75,10 +60,6 @@
 
   border-radius: 0 0 20px 20px;
 }
-
-/* =============================== */
-/* Ribbon Vertical */
-/* =============================== */
 
 .ribbon-v {
   position: absolute;
@@ -94,9 +75,6 @@
   z-index: 11;
 }
 
-/* =============================== */
-/* Ribbon Horizontal */
-/* =============================== */
 
 .ribbon-h {
   position: absolute;
@@ -111,9 +89,6 @@
   z-index: 11;
 }
 
-/* =============================== */
-/* Bow */
-/* =============================== */
 
 .bow {
   position: absolute;
@@ -131,13 +106,7 @@
   transition: .7s;
 }
 
-/* =============================== */
-/* Light flash (opening effect) */
-/* =============================== */
-/* FIX (new): this class was referenced in GiftBox.jsx but never defined
-   anywhere, so the flash effect on opening never actually rendered.
-   A small radial-gradient dot that framer-motion scales up to 8x creates
-   the "burst of light" effect the animation was clearly built for. */
+
 
 .light {
   position: absolute;
@@ -157,9 +126,6 @@
   pointer-events: none;
 }
 
-/* =============================== */
-/* Open Animation */
-/* =============================== */
 
 .open .lid {
   transform:
@@ -174,9 +140,6 @@
     rotate(-15deg);
 }
 
-/* =============================== */
-/* Phone */
-/* =============================== */
 
 @media (max-width: 640px) {
 
@@ -190,10 +153,6 @@
 
 }
 
-/* =============================== */
-/* Tablet */
-/* =============================== */
-
 @media (min-width: 641px) and (max-width: 1024px) {
 
   .gift-box {
@@ -202,9 +161,7 @@
 
 }
 
-/* =============================== */
-/* Desktop Besar */
-/* =============================== */
+
 
 @media (min-width: 1600px) {
 
