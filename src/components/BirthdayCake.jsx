@@ -12,7 +12,6 @@ function BirthdayCake({ onFinished }) {
 
     setBlown(true);
 
-    // Getaran kecil (jika browser mendukung)
     navigator.vibrate?.(80);
 
     confetti({
@@ -31,9 +30,6 @@ function BirthdayCake({ onFinished }) {
   return (
     <section className="mt-12 flex justify-center px-4 sm:mt-16">
 
-      {/* FIX: this element had TWO className props (className="mt-10" then
-          a second className overriding it) — the first "mt-10" was dead
-          code that never applied. Merged into a single className below. */}
       <motion.div
         initial={{
           opacity: 0,
@@ -100,13 +96,7 @@ function BirthdayCake({ onFinished }) {
           className="relative mx-auto mt-8 w-fit"
         >
 
-          {/* Flame */}
-          {/* FIX: was a plain motion.div with onClick — a single emoji
-              character is a tiny (~30px) touch target and wasn't reachable
-              by keyboard at all. Changed to a real <button> with padding
-              plus a matching negative margin, which enlarges the tappable
-              area to a comfortable size without moving the emoji's visual
-              position, and made it focusable/labelled. */}
+ 
 
                     <AnimatePresence mode="wait">
             {!blown ? (
@@ -156,8 +146,6 @@ function BirthdayCake({ onFinished }) {
               </motion.div>
             )}
           </AnimatePresence>
-
-          {/* Cake */}
 
           <motion.img
             src={cakeSticker}
