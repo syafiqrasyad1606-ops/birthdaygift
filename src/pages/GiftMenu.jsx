@@ -1,3 +1,4 @@
+```jsx
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
@@ -54,12 +55,13 @@ function GiftMenu() {
 
   return (
     <main className="relative min-h-[100dvh] overflow-hidden bg-gradient-to-br from-pink-100 via-rose-50 to-pink-200 px-4 py-8 sm:px-8 sm:py-10 md:px-10">
-
+      {/* Background decorations */}
 
       <div className="pointer-events-none absolute -left-24 -top-24 h-56 w-56 rounded-full bg-pink-300 opacity-40 blur-3xl sm:h-96 sm:w-96" />
 
       <div className="pointer-events-none absolute -bottom-24 -right-24 h-64 w-64 rounded-full bg-rose-300 opacity-40 blur-3xl sm:h-[420px] sm:w-[420px]" />
 
+      {/* Heart sticker */}
 
       <motion.img
         src={heartSticker}
@@ -76,6 +78,8 @@ function GiftMenu() {
         }}
       />
 
+      {/* Rose sticker */}
+
       <motion.img
         src={roseSticker}
         alt=""
@@ -90,6 +94,8 @@ function GiftMenu() {
           duration: 5,
         }}
       />
+
+      {/* Star sticker */}
 
       <motion.img
         src={starSticker}
@@ -106,6 +112,8 @@ function GiftMenu() {
         }}
       />
 
+      {/* Teddy sticker */}
+
       <motion.img
         src={teddySticker}
         alt=""
@@ -121,7 +129,7 @@ function GiftMenu() {
       />
 
       <div className="relative z-10 mx-auto w-full max-w-6xl">
-
+        {/* Header */}
 
         <motion.div
           initial={{
@@ -137,7 +145,6 @@ function GiftMenu() {
           }}
           className="text-center"
         >
-
           <motion.img
             src={giftSticker}
             alt=""
@@ -165,17 +172,13 @@ function GiftMenu() {
             karena semuanya dibuat khusus untuk kamu. 🌸
           </p>
 
+          {/* Progress */}
 
           <div className="mx-auto mt-10 w-full max-w-xl px-2">
-
             <div className="mb-3 flex items-center justify-between gap-2 text-sm font-semibold text-gray-600">
-
               <span>Progress Journey</span>
 
-              <span>
-                {progress}/3 Completed
-              </span>
-
+              <span>{progress}/3 Completed</span>
             </div>
 
             <div
@@ -186,7 +189,6 @@ function GiftMenu() {
               aria-valuemax={3}
               aria-label="Journey progress"
             >
-
               <motion.div
                 initial={{
                   width: 0,
@@ -199,17 +201,14 @@ function GiftMenu() {
                 }}
                 className="h-full rounded-full bg-gradient-to-r from-pink-500 via-rose-400 to-pink-400"
               />
-
             </div>
-
           </div>
-
         </motion.div>
 
-            column, which is what causes horizontal scrolling in CSS grids. */}
+        {/* Gift Cards */}
 
         <div className="mt-14 grid min-w-0 gap-6 md:grid-cols-2 xl:grid-cols-3">
-                  {cards.map((card, index) => (
+          {cards.map((card, index) => (
             <motion.div
               key={card.title}
               initial={{
@@ -232,6 +231,7 @@ function GiftMenu() {
               }}
               className="flex min-w-0 flex-col rounded-[28px] bg-white/85 p-5 shadow-xl backdrop-blur-xl transition-all duration-300 hover:shadow-2xl sm:rounded-[32px] sm:p-7"
             >
+              {/* Card Icon */}
 
               <motion.div
                 animate={{
@@ -252,15 +252,19 @@ function GiftMenu() {
                 />
               </motion.div>
 
+              {/* Card Title */}
 
               <h2 className="mt-5 break-words text-xl font-bold text-gray-800 sm:text-2xl md:text-3xl">
                 {card.title}
               </h2>
 
+              {/* Card Description */}
+
               <p className="mt-4 flex-1 text-sm leading-6 text-gray-600 sm:text-base sm:leading-8">
                 {card.description}
               </p>
 
+              {/* Card Footer */}
 
               <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <span
@@ -285,6 +289,7 @@ function GiftMenu() {
           ))}
         </div>
 
+        {/* Final Gift */}
 
         <motion.section
           initial={{
@@ -360,12 +365,12 @@ function GiftMenu() {
                 }`}
               />
 
-              {isEverythingCompleted
-                ? "Open Final Gift"
-                : "Locked"}
+              {isEverythingCompleted ? "Open Final Gift" : "Locked"}
             </motion.button>
           </div>
         </motion.section>
+
+        {/* Footer */}
 
         <motion.footer
           initial={{
@@ -390,10 +395,10 @@ function GiftMenu() {
             Made with lots of love ❤️
           </p>
         </motion.footer>
-
       </div>
     </main>
   );
 }
 
 export default GiftMenu;
+```
