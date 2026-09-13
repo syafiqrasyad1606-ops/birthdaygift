@@ -38,14 +38,8 @@ function Gallery() {
 
   return (
     <>
-      {/* FIX: this page had no overflow-x-hidden and used min-h-screen.
-          Added both — overflow-x-hidden is a safety net in case a very
-          long/unbroken title or caption from `data/gallery` ever pushes
-          wider than the viewport, and min-h-[100dvh] keeps the height
-          accurate on mobile browsers. */}
-      <main className="min-h-[100dvh] overflow-x-hidden bg-gradient-to-b from-pink-100 via-rose-50 to-white px-4 py-8 sm:px-8 sm:py-10 md:px-10">
 
-        {/* Header */}
+      <main className="min-h-[100dvh] overflow-x-hidden bg-gradient-to-b from-pink-100 via-rose-50 to-white px-4 py-8 sm:px-8 sm:py-10 md:px-10">
 
         <section className="mx-auto max-w-4xl pt-6 text-center">
 
@@ -100,9 +94,6 @@ function Gallery() {
 
         </section>
 
-        {/* Timeline */}
-        {/* FIX: min-w-0 so a long caption/title from data/gallery can never
-            force this section wider than the screen on mobile. */}
 
         <section className="mx-auto mt-12 min-w-0 max-w-5xl sm:mt-16 md:mt-20">
 
@@ -118,7 +109,6 @@ function Gallery() {
           ))}
         </section>
 
-        {/* Footer */}
 
         <motion.section
           initial={{
@@ -159,7 +149,6 @@ function Gallery() {
 
       </main>
 
-      {/* Gallery Modal */}
 
       <GalleryModal
         isOpen={selectedPhoto !== null}
